@@ -172,19 +172,21 @@ hotels %>%
 
 ### Exercise 8.
 
-We observe two unusual values in the summary statistics above -- a negative 
-minimum, and a very high maximum). What types of hotels are these? Locate 
-these observations in the dataset and find out the arrival date (year and 
-month) as well as how many people (adults, children, and babies) stayed in 
-the room. You can investigate the data in the viewer to locate these values, but 
-preferably you should identify them in a reproducible way with some code. 
+We observe two unusual values in the summary statistics above -- a negative minimum, and a very high maximum). What types of hotels are these? Locate these observations in the dataset and find out the arrival date (year and 
+month) as well as how many people (adults, children, and babies) stayed in the room. You can investigate the data in the viewer to locate these values, but preferably you should identify them in a reproducible way with some code. 
 
 **Hint:** For example, you can `filter` for the given `adr` amounts and 
 `select` the relevant columns.
 
-```{r label-me-4}
-# add code here
-# pay attention to correctness and code style
+```{r dataexploration}
+hotels %>%
+  filter(adr > 5000) %>% 
+  select (arrival_date_year, adults, children, babies)
+```
+```{r}
+hotels %>%
+  filter(adr < 0) %>% 
+  select (arrival_date_year, adults, children, babies)
 ```
 
 
