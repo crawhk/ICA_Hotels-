@@ -117,7 +117,7 @@ What is the most common number of adults in bookings in this dataset?
 - 2 adults 
   
 Are there any surprising results?  
-- 0 adults is a strange observaiton
+- 0 adults is odd (may be due to data entry error, etc), there are some large adult counts (ex. 26, 20) either this is in error or large parties like weddings, surprisingly low numbers for 3-4 adult groups which would be typical of family trips 
 
 ```{r freqtable_adults}
 hotels %>%
@@ -135,15 +135,13 @@ hotels %>%
 
 ### Exercise 6.
 
-Repeat Exercise 5, once for canceled bookings (`is_canceled` coded as 1) and 
-once for not canceled bookings (`is_canceled` coded as 0). What does this 
-reveal about the surprising results you spotted in the previous exercise?
+Repeat Exercise 5, once for canceled bookings (`is_canceled` coded as 1) and once for not canceled bookings (`is_canceled` coded as 0). What does this reveal about the surprising results you spotted in the previous exercise?  
+- that there are a significant number of canceled bookings (perhaps due to error, incorrect number of adults)
 
-**Note:** Don't forget to label your R chunk as well (where it says `label-me-2`). 
 
-```{r label-me-2}
-# add code here
-# pay attention to correctness and code style
+```{r freqcanceled}
+hotels %>%
+  count(is_canceled, sort = TRUE)
 ```
 
 ### Exercise 7.

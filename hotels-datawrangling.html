@@ -2145,24 +2145,110 @@ babies in city hotels or resort hotels? Test your intuition. Using
 that have more than 1 child <strong>or</strong> baby in the room? Then,
 do the same for city hotels, and compare the numbers of rows in the
 resulting filtered data frames.</p>
-<pre class="r"><code># add code here
-# pay attention to correctness and code style</code></pre>
-<pre class="r"><code># add code here
-# pay attention to correctness and code style</code></pre>
+<pre class="r"><code>hotels %&gt;% 
+  mutate(little_ones = children + babies) %&gt;% 
+  filter(
+    little_ones &gt;= 1,
+    hotel == &quot;Resort Hotel&quot;
+  ) %&gt;% 
+  select(hotel, little_ones)</code></pre>
+<pre><code>## # A tibble: 3,929 × 2
+##    hotel        little_ones
+##    &lt;chr&gt;              &lt;dbl&gt;
+##  1 Resort Hotel           1
+##  2 Resort Hotel           2
+##  3 Resort Hotel           2
+##  4 Resort Hotel           2
+##  5 Resort Hotel           1
+##  6 Resort Hotel           1
+##  7 Resort Hotel           2
+##  8 Resort Hotel           2
+##  9 Resort Hotel           1
+## 10 Resort Hotel           1
+## # ℹ 3,919 more rows</code></pre>
+<pre class="r"><code>hotels %&gt;%
+  mutate(little_ones = children + babies) %&gt;%
+  filter(
+    little_ones &gt; 1,
+    hotel == &quot;City Hotel&quot;
+    )  %&gt;%
+  select(hotel, little_ones)</code></pre>
+<pre><code>## # A tibble: 2,140 × 2
+##    hotel      little_ones
+##    &lt;chr&gt;            &lt;dbl&gt;
+##  1 City Hotel           2
+##  2 City Hotel           2
+##  3 City Hotel           2
+##  4 City Hotel           2
+##  5 City Hotel           2
+##  6 City Hotel           2
+##  7 City Hotel           2
+##  8 City Hotel           2
+##  9 City Hotel           2
+## 10 City Hotel           3
+## # ℹ 2,130 more rows</code></pre>
+<p>More cases in the Resort Hotels - indicates it is more liklely that
+there are children in the resort hotel compared to the city hotel</p>
+<pre class="r"><code>hotels %&gt;%
+  mutate(little_ones = children + babies) %&gt;%
+  count(hotel, little_ones) %&gt;%
+  mutate(prop = n / sum(n))</code></pre>
+<pre><code>## # A tibble: 12 × 4
+##    hotel        little_ones     n       prop
+##    &lt;chr&gt;              &lt;dbl&gt; &lt;int&gt;      &lt;dbl&gt;
+##  1 City Hotel             0 73923 0.619     
+##  2 City Hotel             1  3263 0.0273    
+##  3 City Hotel             2  2056 0.0172    
+##  4 City Hotel             3    82 0.000687  
+##  5 City Hotel             9     1 0.00000838
+##  6 City Hotel            10     1 0.00000838
+##  7 City Hotel            NA     4 0.0000335 
+##  8 Resort Hotel           0 36131 0.303     
+##  9 Resort Hotel           1  2183 0.0183    
+## 10 Resort Hotel           2  1716 0.0144    
+## 11 Resort Hotel           3    29 0.000243  
+## 12 Resort Hotel          10     1 0.00000838</code></pre>
 </div>
 <div id="exercise-5." class="section level3">
 <h3>Exercise 5.</h3>
 <p>Create a frequency table of the number of <code>adults</code> in a
 booking. Display the results in descending order so the most common
-observation is on top. What is the most common number of adults in
-bookings in this dataset? Are there any surprising results?</p>
-<p><strong>Note:</strong> Don’t forget to label your R chunk as well
-(where it says <code>label-me-1</code>). Your label should be short,
-informative, and shouldn’t include spaces. It also shouldn’t repeat a
-previous label, otherwise R Markdown will give you an error about
-repeated R chunk labels.</p>
-<pre class="r"><code># add code here
-# pay attention to correctness and code style</code></pre>
+observation is on top.</p>
+<p>What is the most common number of adults in bookings in this
+dataset?<br />
+- 2 adults</p>
+<p>Are there any surprising results?<br />
+- 0 adults is a strange observaiton</p>
+<pre class="r"><code>hotels %&gt;%
+  count(adults, sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 14 × 2
+##    adults     n
+##     &lt;dbl&gt; &lt;int&gt;
+##  1      2 89680
+##  2      1 23027
+##  3      3  6202
+##  4      0   403
+##  5      4    62
+##  6     26     5
+##  7      5     2
+##  8     20     2
+##  9     27     2
+## 10      6     1
+## 11     10     1
+## 12     40     1
+## 13     50     1
+## 14     55     1</code></pre>
+<pre class="r"><code>hotels %&gt;%
+  summarize(
+    min_adr = min(adults),
+    mean_adr = mean(adults),
+    median_adr = median(adults),
+    max_adr = max(adults)
+    )</code></pre>
+<pre><code>## # A tibble: 1 × 4
+##   min_adr mean_adr median_adr max_adr
+##     &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+## 1       0     1.86          2      55</code></pre>
 </div>
 <div id="exercise-6." class="section level3">
 <h3>Exercise 6.</h3>
@@ -2181,8 +2267,6 @@ surprising results you spotted in the previous exercise?</p>
 (<code>adr</code>) grouped by <code>hotel</code> type so that you can
 get these statistics separately for resort and city hotels. Which type
 of hotel is higher, on average?</p>
-<pre class="r"><code># add code here
-# pay attention to correctness and code style</code></pre>
 </div>
 <div id="exercise-8." class="section level3">
 <h3>Exercise 8.</h3>
