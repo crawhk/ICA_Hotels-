@@ -102,21 +102,35 @@ hotels %>%
 
 More cases in the Resort Hotels - indicates it is more liklely that there are children in the resort hotel compared to the city hotel 
 
+```{r}
+hotels %>%
+  mutate(little_ones = children + babies) %>%
+  count(hotel, little_ones) %>%
+  mutate(prop = n / sum(n))
+```
+
 ### Exercise 5.
 
-Create a frequency table of the number of `adults` in a booking. Display the 
-results in descending order so the most common observation is on top. What is 
-the most common number of adults in bookings in this dataset? Are there any 
-surprising results?
+Create a frequency table of the number of `adults` in a booking. Display the results in descending order so the most common observation is on top. 
 
-**Note:** Don't forget to label your R chunk as well (where it says `label-me-1`). 
-Your label should be short, informative, and shouldn't include spaces. It also 
-shouldn't repeat a previous label, otherwise R Markdown will give you an 
-error about repeated R chunk labels.
+What is the most common number of adults in bookings in this dataset?  
+- 2 adults 
+  
+Are there any surprising results?  
+- 0 adults is a strange observaiton
 
-```{r label-me-1}
-# add code here
-# pay attention to correctness and code style
+```{r freqtable_adults}
+hotels %>%
+  count(adults, sort = TRUE)
+```
+```{r summstatsadults}
+hotels %>%
+  summarize(
+    min_adr = min(adults),
+    mean_adr = mean(adults),
+    median_adr = median(adults),
+    max_adr = max(adults)
+    )
 ```
 
 ### Exercise 6.
@@ -139,8 +153,7 @@ by `hotel` type so that you can get these statistics separately for resort and
 city hotels. Which type of hotel is higher, on average? 
 
 ```{r label-me-3}
-# add code here
-# pay attention to correctness and code style
+
 ```
 
 ### Exercise 8.
