@@ -146,12 +146,28 @@ hotels %>%
 
 ### Exercise 7.
 
-Calculate minimum, mean, median, and maximum average daily rate (`adr`) grouped 
-by `hotel` type so that you can get these statistics separately for resort and 
-city hotels. Which type of hotel is higher, on average? 
+Calculate minimum, mean, median, and maximum average daily rate (`adr`) grouped by `hotel` type so that you can get these statistics separately for resort and 
+city hotels. Which type of hotel is higher, on average?  
+- On average city hotels are have a greater average daily booking 
 
-```{r label-me-3}
 
+```{r average_daily_bookings}
+hotels %>%
+  summarize(mean_adr = mean(adr))
+```
+```{r}
+hotels %>%
+  group_by(hotel) %>% 
+  summarize(mean_adr = mean(adr))
+```
+```{r}
+hotels %>%
+  summarize(
+    min_adr = min(adr),
+    mean_adr = mean(adr),
+    median_adr = median(adr),
+    max_adr = max(adr)
+    )
 ```
 
 ### Exercise 8.
