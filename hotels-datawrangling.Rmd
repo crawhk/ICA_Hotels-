@@ -50,30 +50,27 @@ from the US (`country` code `"USA"`) and the `lead_time` is less than 1 day.
 **Note:** You will need to set `eval=TRUE` when you have an answer you want to 
 try out.
 
-```{r travel-whim, eval=FALSE}
+```{r travel-whim, eval=TRUE}
 hotels %>%
-  filter(
-    country____"USA", 
-    lead_time ____ ____
-    )
+  filter(country != "USA", 
+    lead_time < 1)
 ```
 
 ### Exercise 3.
 
 How many bookings involve at least 1 child **or** baby?
 
-In the following chunk, replace 
+In the following chunk, replace #
 
-- `[AT LEAST]` with the logical operator for "at least" (in two places)
-- `[OR]` with the logical operator for "or"
+- `[AT LEAST]` with the logical operator for "at least"# (in two places) #
+- `[OR]` with the logical operator for "or"# 
 
-**Note:** You will need to set `eval=TRUE` when you have an answer you want to 
-try out.
+**Note:** You will need to set `eval=TRUE` when you have# an answer you want to try out.#
 
-```{r some-children, eval=FALSE}
+```{r some-children, eval=TRUE}
 hotels %>%
   filter(
-    children [AT LEAST] 1 [OR] babies [AT LEAST] 1
+    children >= 1 | babies >= 1
     )
 ```
 
